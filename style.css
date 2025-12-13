@@ -15,12 +15,31 @@ body {
     background: rgba(255,255,255,0.2);
 }
 
+.separator-two {
+    width: 100%;
+    height: 1px;
+    background: white;
+}
+
 /* Hide all checkboxes */
 #menu-toggle,
 #search-toggle,
 #profile-toggle,
 #lang-toggle {
     display: none;
+}
+
+/* START WITH ALL MENUS HIDDEN (Universal styles for all toggle boxes) */
+.toggle-menu,
+.toggle-search,
+.toggle-profile,
+.toggle-lang {
+    display: none;
+    position: absolute;
+    background: #1a2f6b;
+    padding: 15px;
+    border-radius: 6px;
+    z-index: 20;
 }
 
 /* --- Header/Top Navigation (Parent 2) --- */
@@ -67,19 +86,6 @@ body {
 
 /* --- Toggles & Dropdowns (Child Toggles) --- */
 
-/* START WITH ALL MENUS HIDDEN (Universal styles for all toggle boxes) */
-.toggle-menu,
-.toggle-search,
-.toggle-profile,
-.toggle-lang {
-    display: none;
-    position: absolute;
-    background: #1a2f6b;
-    padding: 15px;
-    border-radius: 6px;
-    z-index: 20;
-}
-
 /* Hamburger Menu Box */
 #menu-toggle:checked ~ .toggle-menu {
     display: flex;
@@ -100,10 +106,12 @@ body {
 
 /* Search Box */
 .toggle-search {
-    top: -100%; /* Positioning inside right-icons div */
+    top: -100%;
     right: 60px;
-    margin-top: 5px;
+    background: #1a2f6b;
     padding: 10px;
+    border-radius: 2px;
+    margin-top: 5px;
 }
 
 .toggle-search input {
@@ -165,7 +173,7 @@ body {
 
 #lang-toggle:checked ~ .lang-box {
     display: flex;
-    flex-direction: column; /* Added flex-direction for correct stacking */
+    flex-direction: column;
     gap: 10px;
     top: 50px;
 }
@@ -178,37 +186,58 @@ body {
     text-align: center;
 }
 
+/* General H1 settings */
 .content h1 {
-    font-size: 15px;
+    font-size: 1.5rem;
     margin-bottom: 20px;
     text-align: left;
     min-height: auto;
 }
 
+/* Specific H1 classes */
+.taytl-h1 {
+    font-size: 32px;
+}
+
+.content .taytl-h1 {
+    font-size: 1rem;
+}
+
 /* Image container (Child 2) */
 .ml {
     width: 100%;
+    max-width: 400px;
     background: #222;
     border-radius: 10px;
     margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .ml img{
     width: 100%;
+    max-width: 600px;
     height: auto;
     object-fit: cover;
+    display: block;
+    margin-left: auto;
+    margin-right: auto
 }
 
-/* Text box (Child 3) */
-.text-box {
-    background: #737aa4;
+/* Text boxes (Child 3) */
+.text-box, .text-box2 {
     padding: 20px;
     border-radius: 10px;
     line-height: 1.6;
     text-align: left;
 }
 
-.text-box p {
+.text-box {
+     background: #737aa4;
+}
+
+
+.text-box p, .text-box2 p {
     font-size: .80rem;
 }
 
@@ -238,7 +267,7 @@ footer {
     gap: 15px;
 }
 
-.footer-right span { /* Changed i to span here in original CSS, fixed back to span (or i) to match HTML */
+.footer-right i {
     font-size: 15px;
     cursor: pointer;
 }
@@ -247,12 +276,12 @@ footer {
 @media (min-width: 700px) {
     .logo { font-size: 2px; }
     .content h1 { font-size: 32px; }
-    .image-placeholder { height: 300px; } /* image-placeholder class not present in HTML */
+    .image-placeholder { height: 300px; }
     .text-box { font-size: 18px; }
 }
 
 @media (min-width: 1100px) {
     .content { max-width: 1100px; }
     .content h1 { font-size: 36px; }
-    .image-placeholder { height: 400px; } /* image-placeholder class not present in HTML */
+    .image-placeholder { height: 400px; }
 }
