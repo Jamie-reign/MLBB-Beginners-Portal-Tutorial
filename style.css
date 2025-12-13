@@ -1,0 +1,258 @@
+/* --- Global/Body Styles (Parent 1) --- */
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    background-color: #14296a;
+    background: linear-gradient(to bottom, #14296a, #4c4c64);
+}
+
+.separator {
+    width: 100%;
+    height: 1px;
+    background: rgba(255,255,255,0.2);
+}
+
+/* Hide all checkboxes */
+#menu-toggle,
+#search-toggle,
+#profile-toggle,
+#lang-toggle {
+    display: none;
+}
+
+/* --- Header/Top Navigation (Parent 2) --- */
+.top-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    position: relative;
+}
+
+/* Hamburger Icon (Child 1) */
+.hamburger {
+    font-size: 20px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+/* Logo (Child 2) */
+.logo {
+    font-size: 40px;
+    font-weight: bold;
+    height: auto;
+    display: flex;
+    margin-right: auto;
+}
+
+.logo img {
+    height: 40px;
+    width: auto;
+}
+
+/* Right Icons Container (Child 3 Parent) */
+.right-icons {
+    position: relative;
+}
+
+.icon {
+    font-size: 15px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+
+/* --- Toggles & Dropdowns (Child Toggles) --- */
+
+/* START WITH ALL MENUS HIDDEN (Universal styles for all toggle boxes) */
+.toggle-menu,
+.toggle-search,
+.toggle-profile,
+.toggle-lang {
+    display: none;
+    position: absolute;
+    background: #1a2f6b;
+    padding: 15px;
+    border-radius: 6px;
+    z-index: 20;
+}
+
+/* Hamburger Menu Box */
+#menu-toggle:checked ~ .toggle-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    top: 60px;
+    left: 10px;
+    width: 5em;
+}
+
+.menu-box a, .toggle-menu a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 0;
+    font-weight: bold;
+    font-size: 5px;
+}
+
+/* Search Box */
+.toggle-search {
+    top: -100%; /* Positioning inside right-icons div */
+    right: 60px;
+    margin-top: 5px;
+    padding: 10px;
+}
+
+.toggle-search input {
+    padding: 2px 1px;
+    border-radius: 2px;
+    border: none;
+    outline: none;
+    width: 225px;
+    height: 30px;
+}
+
+#search-toggle:checked ~ .toggle-search {
+    display: block;
+}
+
+/* Profile Box */
+#profile-toggle:checked ~ .toggle-profile {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    right: 10px;
+    top: 60px;
+}
+
+.toggle-profile a, .profile-box a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+/* --- Second Navigation (Parent 3) --- */
+.second-nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+    padding: 15px;
+    font-weight: bold;
+    font-size: 10px;
+}
+
+.second-nav a {
+    text-decoration: none;
+    color: white;
+    padding: 1px;
+}
+
+/* Language Icon and Box (Child 2) */
+.lang-icon {
+    cursor: pointer;
+    margin-left: 2rem;
+}
+
+.lang-box{
+    position: absolute;
+    right: 20px;
+}
+
+#lang-toggle:checked ~ .lang-box {
+    display: flex;
+    flex-direction: column; /* Added flex-direction for correct stacking */
+    gap: 10px;
+    top: 50px;
+}
+
+/* --- Main Content (Parent 4) --- */
+.content {
+    padding: 20px;
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+}
+
+.content h1 {
+    font-size: 15px;
+    margin-bottom: 20px;
+    text-align: left;
+    min-height: auto;
+}
+
+/* Image container (Child 2) */
+.ml {
+    width: 100%;
+    background: #222;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.ml img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Text box (Child 3) */
+.text-box {
+    background: #737aa4;
+    padding: 20px;
+    border-radius: 10px;
+    line-height: 1.6;
+    text-align: left;
+}
+
+.text-box p {
+    font-size: .80rem;
+}
+
+/* --- Footer (Parent 5) --- */
+footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+}
+
+/* Footer Left (Child 1) */
+.footer-left {
+    font-size: 10px;
+    gap: 15px;
+}
+
+.footer-left a {
+    color: white;
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+/* Footer Right (Child 2) */
+.footer-right {
+    display: flex;
+    gap: 15px;
+}
+
+.footer-right span { /* Changed i to span here in original CSS, fixed back to span (or i) to match HTML */
+    font-size: 15px;
+    cursor: pointer;
+}
+
+/* --- Media Queries (Parent 6) --- */
+@media (min-width: 700px) {
+    .logo { font-size: 2px; }
+    .content h1 { font-size: 32px; }
+    .image-placeholder { height: 300px; } /* image-placeholder class not present in HTML */
+    .text-box { font-size: 18px; }
+}
+
+@media (min-width: 1100px) {
+    .content { max-width: 1100px; }
+    .content h1 { font-size: 36px; }
+    .image-placeholder { height: 400px; } /* image-placeholder class not present in HTML */
+}
