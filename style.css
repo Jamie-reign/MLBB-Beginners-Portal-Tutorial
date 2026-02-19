@@ -232,6 +232,34 @@ body {
     text-align: left;
 }
 
+.info-section {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.info-section.reverse {
+    flex-direction: row-reverse;
+}
+
+.text-content {
+    flex: 1;
+}
+
+.builds1 {
+    flex: 1;
+    max-width: 400px;
+    background: transparent;
+}
+
+.builds1 img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    display: block;
+}
+
 .text-box {
      background: #737aa4;
 }
