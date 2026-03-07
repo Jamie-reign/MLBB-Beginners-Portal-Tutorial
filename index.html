@@ -24,11 +24,11 @@
         <a href="emblems.html#">Counter Items</a>
         <a href="emblems.html#">Emblem mastery</a>
         <a href="emblems.html#">Flexible builds</a>
-        <a href="#">Lane rotation</a>
-        <a href="#">Battle spells</a>
-        <a href="#">Teamfight and Positioning</a>
-        <a href="#">Role responsibilities</a>
-        <a href="#">Contact Us</a>
+        <a href="gameplay.html">Lane rotation</a>
+        <a href="gameplay.html">Battle spells</a>
+        <a href="gameplay.html">Teamfight and Positioning</a>
+        <a href="gameplay.html">Role responsibilities</a>
+        <a href="contact.us.html">Contact Us</a>
     </div>
 
     <!-- Child 2: Logo -->
@@ -45,7 +45,8 @@
         <input type="checkbox" id="search-toggle">
         <label for="search-toggle" class="icon search-icon">🔍</label>
         <div class="toggle-search">
-            <input type="text" placeholder="Search...">
+            <input type="text" id="searchInput" placeholder="Search..." onkeypress="if(event.key==='Enter'){runSearch()}">
+           <button onclick="runSearch()">Search</button>
         </div>
         
         <!-- Grandchild B: Profile Toggle and Box -->
@@ -68,8 +69,8 @@
     <a href="index.html">HOME</a>
     <a href="heroes.html">HEROES</a>
     <a href="emblems.html">EMBLEMS</a>
-    <a href="_parent">GAMEPLAY</a>
-    <a href="_parent">CONTACT US</a>
+    <a href="gameplay.html">GAMEPLAY</a>
+    <a href="contact-us.html">CONTACT US</a>
 
     <!-- Child 2: Language Toggle and Box -->
     <input type="checkbox" id="lang-toggle">
@@ -120,7 +121,7 @@
     </div>
 
 </footer>
-
+<script src="script.js"></script>
 </body>
 </html>
 
