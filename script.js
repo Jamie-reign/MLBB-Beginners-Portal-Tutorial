@@ -47,44 +47,24 @@ document.querySelectorAll("a[href^='#']").forEach(link => {
     });
 });
 
-
 /* =========================
-   BACK TO TOP BUTTON FIXED
+   BACK TO TOP BUTTON
 ========================= */
-
 let topBtn = document.createElement("button");
 topBtn.innerHTML = "↑";
 topBtn.style.position = "fixed";
-topBtn.style.bottom = "80px"; // start above footer
+topBtn.style.bottom = "20px";
 topBtn.style.right = "20px";
 topBtn.style.padding = "10px 15px";
 topBtn.style.fontSize = "18px";
 topBtn.style.cursor = "pointer";
 topBtn.style.display = "none";
-topBtn.style.border = "none";
-topBtn.style.borderRadius = "5px";
-topBtn.style.backgroundColor = "#5a82c1";
-topBtn.style.color = "white";
-topBtn.style.zIndex = "1000";
-
 document.body.appendChild(topBtn);
 
-window.addEventListener("scroll", function() {
-    let footer = document.querySelector("footer");
-    let footerTop = footer.getBoundingClientRect().top;
-
-    // Show button if scrolled down and footer is not in view
-    if(window.scrollY > 300 && footerTop > window.innerHeight){
-        topBtn.style.display = "block";
-    } else {
-        topBtn.style.display = "none";
-    }
+window.addEventListener("scroll", function(){
+    topBtn.style.display = window.scrollY > 300 ? "block" : "none";
 });
 
-// Smooth scroll to top on click
-topBtn.addEventListener("click", function() {
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
+topBtn.addEventListener("click", function(){
+    window.scrollTo({top: 0, behavior: "smooth"});
 });
