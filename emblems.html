@@ -10,9 +10,7 @@
 <body>
 
 <header class="top-nav">
-<!-- Parent: Top Nav -->
 
-    <!-- Child 1: Hamburger Menu Toggle and Box -->
     <input type="checkbox" id="menu-toggle">
     <label for="menu-toggle" class="hamburger">☰</label>
     <div class="menu-box toggle-menu">
@@ -24,31 +22,29 @@
         <a href="emblems.html#">Counter Items</a>
         <a href="emblems.html#">Emblem mastery</a>
         <a href="emblems.html#">Flexible builds</a>
-        <a href="#">Lane rotation</a>
-        <a href="#">Battle spells</a>
-        <a href="#">Teamfight and Positioning</a>
-        <a href="#">Role responsibilities</a>
-        <a href="#">Contact Us</a>
+        <a href="gameplay.html">Lane rotation</a>
+        <a href="gameplay.html">Battle spells</a>
+        <a href="gameplay.html">Teamfight and Positioning</a>
+        <a href="gameplay.html">Role responsibilities</a>
+        <a href="contact-us.html">Contact Us</a>
     </div>
 
-    <!-- Child 2: Logo -->
     <div class="logo">
         <a href="https://www.mobilelegends.com/">
         <img src="Mobile_Legends_Bang_Bang_2025_logo.png" alt="ml">
         </a>
     </div>
 
-    <!-- Child 3: Right Icons Container (Search and Profile Toggles/Boxes) -->
     <div class="right-icons">
-        
-        <!-- Grandchild A: Search Toggle and Box -->
+       
         <input type="checkbox" id="search-toggle">
         <label for="search-toggle" class="icon search-icon">🔍</label>
-        <div class="toggle-search">
-            <input type="text" placeholder="Search...">
+        <div class class="toggle-search">
+            <input type="text" id="searchInput" placeholder="Search..." onkeypress="if(event.key==='Enter'){runSearch()}">
+           <button onclick="runSearch()">Search</button>="toggle-search">
+          
         </div>
         
-        <!-- Grandchild B: Profile Toggle and Box -->
         <label for="profile-toggle" class="icon profile-icon">👤</label>
         <input type="checkbox" id="profile-toggle">
         <div class="profile-box toggle-profile">
@@ -62,16 +58,13 @@
 <div class="separator"></div>
 
 <nav class="second-nav">
-<!-- Parent: Second Nav -->
 
-    <!-- Child 1: Nav Links -->
     <a href="index.html">HOME</a>
     <a href="heroes.html">HEROES</a>
     <a href="emblems.html">EMBLEMS</a>
-    <a href="_parent">GAMEPLAY</a>
-    <a href="_parent">CONTACT US</a>
+    <a href="gameplay.html">GAMEPLAY</a>
+    <a href="contact-us.html">CONTACT US</a>
 
-    <!-- Child 2: Language Toggle and Box -->
     <input type="checkbox" id="lang-toggle">
     <label for="lang-toggle" class="lang-icon">🌐</label>
     <div class="lang-box toggle-lang">
@@ -84,15 +77,12 @@
 <div class="separator"></div>
 
 <main class="content">
-<!-- Parent: Main Content -->
 
-    <!-- Child 1: Main Header -->
     <h1 class="taytl-h1">ITEMS AND EMBLEMS</h1>
     
     <div class="separator-two"></div><br>
     </div>
 
-    <!-- Child 3: Text Container with content sections -->
 <div class="text-box2">
     <div class="info-section">
         <div class="text-content">
@@ -136,22 +126,19 @@
 <div class="separator"></div>
 
 <footer>
-<!-- Parent: Footer -->
 
-    <!-- Child 1: Footer Left Links and Copyright -->
     <div class="footer-left">
         <a href="#">Privacy Policy</a>
         <a href="#">Terms of Service</a>
         <p>©2025, Moontoon. All rights reserved</p>
     </div>
 
-    <!-- Child 2: Footer Right Icons -->
     <div class="footer-right">
         <i class="fa-solid fa-envelope"></i>
         <i class="fa-brands fa-facebook"></i>
     </div>
 
 </footer>
-
+<script src="script.js"></script>
 </body>
 </html>
