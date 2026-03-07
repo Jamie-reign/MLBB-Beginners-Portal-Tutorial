@@ -1,27 +1,50 @@
-// =========================
-// SEARCH FUNCTIONALITY
-// =========================
+/* =========================
+   SEARCH WITH HIGHLIGHT AND SCROLL
+========================= */
 function runSearch() {
-    let input = document.getElementById("searchInput").value.toLowerCase();
-    let content = document.body.innerText.toLowerCase();
+    // Remove any previous highlights
+    document.querySelectorAll('.highlighted').forEach(el => {
+        const parent = el.parentNode;
+        parent.replaceChild(document.createTextNode(el.textContent), el);
+        parent.normalize(); // merge text nodes
+    });
 
-    if (input === "") {
+    const input = document.getElementById("searchInput").value.trim().toLowerCase();
+    if (!input) {
         alert("Please type something to search.");
         return;
     }
 
-    if (content.includes(input)) {
-        alert("Found results for: " + input);
-    } else {
+    const contentAreas = document.querySelectorAll("main, header, nav, footer");
+    let found = false;
+
+    for (let area of contentAreas) {
+        const html = area.innerHTML;
+        const lowerHtml = html.toLowerCase();
+
+        if (lowerHtml.includes(input)) {
+            // wrap first occurrence with a span
+            const regex = new RegExp(`(${input})`, "i");
+            area.innerHTML = html.replace(regex, '<span class="highlighted">$1</span>');
+
+            const highlight = area.querySelector('.highlighted');
+            highlight.scrollIntoView({ behavior: "smooth", block: "center" });
+
+            found = true;
+            break;
+        }
+    }
+
+    if (!found) {
         alert("No results found.");
     }
 }
 
-// Trigger search when Enter key is pressed
-document.addEventListener("DOMContentLoaded", function() {
-    let searchBox = document.getElementById("searchInput");
+// Trigger search on Enter
+document.addEventListener("DOMContentLoaded", function () {
+    const searchBox = document.getElementById("searchInput");
     if (searchBox) {
-        searchBox.addEventListener("keypress", function(e) {
+        searchBox.addEventListener("keypress", function (e) {
             if (e.key === "Enter") {
                 runSearch();
             }
@@ -29,56 +52,48 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-
-// =========================
-// BACK TO TOP BUTTON (SAFE ABOVE FOOTER)
-// =========================
-
-// Create button
-let topBtn = document.createElement("button");
-topBtn.innerHTML = "↑";
+/* =========================
+   BACK TO TOP BUTTON
+========================= */
+const topBtn = document.createElement("button");
+topBtn.textContent = "↑";
 topBtn.style.position = "fixed";
+topBtn.style.bottom = "70px"; // leave space for footer icons
+topBtn.style.right = "20px";
 topBtn.style.padding = "10px 15px";
 topBtn.style.fontSize = "18px";
 topBtn.style.cursor = "pointer";
 topBtn.style.display = "none";
 topBtn.style.border = "none";
 topBtn.style.borderRadius = "5px";
-topBtn.style.backgroundColor = "#5a82c1";
+topBtn.style.background = "#5a82c1";
 topBtn.style.color = "white";
-topBtn.style.zIndex = "1000"; // On top
+topBtn.style.zIndex = "50"; // above other elements
+
 document.body.appendChild(topBtn);
 
-// Footer height detection
-let footer = document.querySelector("footer");
-
-window.addEventListener("scroll", function() {
-    let scrollY = window.scrollY;
-    let windowHeight = window.innerHeight;
-    let bodyHeight = document.body.scrollHeight;
-    let footerHeight = footer.offsetHeight;
-
-    // Show button after scrolling 300px
-    if (scrollY > 300) {
+window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
         topBtn.style.display = "block";
     } else {
         topBtn.style.display = "none";
     }
-
-    // Move button above footer if near bottom
-    if (scrollY + windowHeight >= bodyHeight - footerHeight) {
-        topBtn.style.bottom = (footerHeight + 20) + "px";
-    } else {
-        topBtn.style.bottom = "20px";
-    }
-
-    topBtn.style.right = "20px";
 });
 
-// Scroll to top
-topBtn.addEventListener("click", function() {
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
+topBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
 });
+
+/* =========================
+   HIGHLIGHT STYLE
+========================= */
+const style = document.createElement('style');
+style.innerHTML = `
+.highlighted {
+    background-color: #f1f05a;
+    color: #14296a;
+    padding: 2px 2px;
+    border-radius: 3px;
+}
+`;
+document.head.appendChild(style);
