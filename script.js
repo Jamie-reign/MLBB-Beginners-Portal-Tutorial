@@ -1,70 +1,84 @@
+// =========================
+// SEARCH FUNCTIONALITY
+// =========================
 function runSearch() {
-    let input = document.getElementById("searchInput").value.toLowerCase().trim();
-    
-    if(input === ""){
+    let input = document.getElementById("searchInput").value.toLowerCase();
+    let content = document.body.innerText.toLowerCase();
+
+    if (input === "") {
         alert("Please type something to search.");
         return;
     }
-    let elements = document.querySelectorAll("h1, p, a");
-    let found = false;
 
-    elements.forEach(el => {
-        el.style.backgroundColor = "";
-        if(el.innerText.toLowerCase().includes(input)){
-            if(!found) {
-                el.scrollIntoView({behavior: "smooth", block: "center"});
-                found = true;
-            }
-            el.style.backgroundColor = "#ffff0040";
-            setTimeout(() => { el.style.backgroundColor = ""; }, 1500);
-        }
-    });
-
-    if(!found){
+    if (content.includes(input)) {
+        alert("Found results for: " + input);
+    } else {
         alert("No results found.");
     }
 }
 
-document.addEventListener("DOMContentLoaded", function(){
+// Trigger search when Enter key is pressed
+document.addEventListener("DOMContentLoaded", function() {
     let searchBox = document.getElementById("searchInput");
-
-    if(searchBox){
-        searchBox.addEventListener("keypress", function(e){
-            if(e.key === "Enter"){
+    if (searchBox) {
+        searchBox.addEventListener("keypress", function(e) {
+            if (e.key === "Enter") {
                 runSearch();
             }
         });
     }
 });
 
-document.querySelectorAll("a[href^='#']").forEach(link => {
-    link.addEventListener("click", function(e){
-        let target = document.querySelector(this.getAttribute("href"));
-        if(target){
-            e.preventDefault();
-            target.scrollIntoView({behavior: "smooth"});
-        }
-    });
-});
 
-/* =========================
-   BACK TO TOP BUTTON
-========================= */
+// =========================
+// BACK TO TOP BUTTON (SAFE ABOVE FOOTER)
+// =========================
+
+// Create button
 let topBtn = document.createElement("button");
 topBtn.innerHTML = "↑";
 topBtn.style.position = "fixed";
-topBtn.style.bottom = "20px";
-topBtn.style.right = "20px";
 topBtn.style.padding = "10px 15px";
 topBtn.style.fontSize = "18px";
 topBtn.style.cursor = "pointer";
 topBtn.style.display = "none";
+topBtn.style.border = "none";
+topBtn.style.borderRadius = "5px";
+topBtn.style.backgroundColor = "#5a82c1";
+topBtn.style.color = "white";
+topBtn.style.zIndex = "1000"; // On top
 document.body.appendChild(topBtn);
 
-window.addEventListener("scroll", function(){
-    topBtn.style.display = window.scrollY > 300 ? "block" : "none";
+// Footer height detection
+let footer = document.querySelector("footer");
+
+window.addEventListener("scroll", function() {
+    let scrollY = window.scrollY;
+    let windowHeight = window.innerHeight;
+    let bodyHeight = document.body.scrollHeight;
+    let footerHeight = footer.offsetHeight;
+
+    // Show button after scrolling 300px
+    if (scrollY > 300) {
+        topBtn.style.display = "block";
+    } else {
+        topBtn.style.display = "none";
+    }
+
+    // Move button above footer if near bottom
+    if (scrollY + windowHeight >= bodyHeight - footerHeight) {
+        topBtn.style.bottom = (footerHeight + 20) + "px";
+    } else {
+        topBtn.style.bottom = "20px";
+    }
+
+    topBtn.style.right = "20px";
 });
 
-topBtn.addEventListener("click", function(){
-    window.scrollTo({top: 0, behavior: "smooth"});
+// Scroll to top
+topBtn.addEventListener("click", function() {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 });
