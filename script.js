@@ -8,30 +8,36 @@ function runSearch() {
         return;
     }
 
-    // Remove old highlights
+    // Remove previous highlights
     document.querySelectorAll(".highlighted").forEach(el => {
-        const parent = el.parentNode;
-        parent.replaceChild(document.createTextNode(el.textContent), el);
+        el.replaceWith(document.createTextNode(el.textContent));
     });
 
-    // Search text and highlight
-    const bodyText = document.body.innerHTML;
-    const regex = new RegExp(`(${input})`, "gi");
-    const newText = bodyText.replace(regex, '<span class="highlighted">$1</span>');
+    // Find matches in paragraphs and headings
+    const elements = document.querySelectorAll("p, h1, h2, h3, h4, h5, h6, a");
+    let found = false;
 
-    if (bodyText === newText) {
+    elements.forEach(el => {
+        const text = el.textContent;
+        const regex = new RegExp(`(${input})`, "gi");
+        if (regex.test(text)) {
+            const newHTML = text.replace(regex, '<span class="highlighted">$1</span>');
+            el.innerHTML = newHTML;
+            found = true;
+        }
+    });
+
+    if (!found) {
         alert("No results found.");
         return;
     }
-
-    document.body.innerHTML = newText;
 
     // Scroll to first match
     const firstMatch = document.querySelector(".highlighted");
     if (firstMatch) firstMatch.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
-// Allow Enter key to search
+// Enter key triggers search
 document.getElementById("searchInput")?.addEventListener("keypress", function(e) {
     if (e.key === "Enter") runSearch();
 });
@@ -43,7 +49,7 @@ document.getElementById("searchInput")?.addEventListener("keypress", function(e)
 const topBtn = document.createElement("button");
 topBtn.textContent = "↑";
 topBtn.style.position = "fixed";
-topBtn.style.bottom = "70px"; // moved up to not block footer icons
+topBtn.style.bottom = "70px"; // higher so it doesn't block footer icons
 topBtn.style.right = "20px";
 topBtn.style.padding = "10px 15px";
 topBtn.style.fontSize = "18px";
@@ -56,7 +62,7 @@ topBtn.addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-// Show button after scroll
+// Show button when scrolling
 window.addEventListener("scroll", () => {
     topBtn.style.display = window.scrollY > 300 ? "block" : "none";
 });
